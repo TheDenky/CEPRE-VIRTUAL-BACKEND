@@ -1,0 +1,34 @@
+package com.example.ceprevirtualbackend.controller;
+
+import com.example.ceprevirtualbackend.entity.Nota;
+import com.example.ceprevirtualbackend.service.NotaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(path = "api/v1/nota")
+public class NotaController {
+    @Autowired
+    private NotaService notaService;
+
+    @GetMapping
+    public List<Nota> getAll(){
+        return notaService.getNotas();
+    }
+    @GetMapping("/{notaId}")
+    public Optional<Nota> getById(@PathVariable("notaId") Long notaId){
+        return notaService.getNota(notaId);
+    }
+    @PostMapping
+    public Nota saveUpdate(@RequestBody Nota nota){
+        notaService.saveOrUpdateNota(nota);
+        return nota;
+    }
+    @DeleteMapping("/{notaId}")
+    public void delete(@PathVariable("notaId") Long notaId){
+        notaService.deleteNota(notaId);
+    }
+}
