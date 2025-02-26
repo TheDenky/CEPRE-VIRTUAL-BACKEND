@@ -1,5 +1,6 @@
 package com.example.ceprevirtualbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,9 +14,10 @@ public class Nota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notaId;
 
-    //@ManyToOne
-    //@JoinColumn(name = "estudianteCicloId")
-    //private EstudianteCiclo estudianteCiclo;
+    @ManyToOne
+    @JoinColumn(name = "estudianteCicloId")
+    @JsonIgnoreProperties(value={"estudianteCiclo", "estudiante", "ciclo", "observacion", "asistencia", "nota"})
+    private EstudianteCiclo estudianteCiclo;
 
     @Column(name = "nombreProceso")
     private String nombreProceso;

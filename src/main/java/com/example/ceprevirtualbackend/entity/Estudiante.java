@@ -1,5 +1,7 @@
 package com.example.ceprevirtualbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +16,7 @@ public class Estudiante {
     private Long estudianteId;
 
     @OneToMany(mappedBy = "estudiante")
+    @JsonIgnoreProperties(value={"estudiante"})
     private List<EstudianteCiclo> estudianteCiclo;
 
     @Column(name = "nombre")

@@ -12,6 +12,15 @@ import java.util.Optional;
 public class EstudianteService {
     @Autowired
     EstudianteRepository estudianteRepository;
+    public boolean verificarCredenciales(String dni, String contrasena){
+        Estudiante estudiante = estudianteRepository.findByDni(dni);
+
+        return estudiante != null && estudiante.getDni().equals(contrasena);
+    }
+    //public Estudiante
+    public Estudiante getEstudianteByDni(String dni){
+        return estudianteRepository.findByDni(dni);
+    }
 
     public List<Estudiante> getEstudiantes(){
         return estudianteRepository.findAll();
