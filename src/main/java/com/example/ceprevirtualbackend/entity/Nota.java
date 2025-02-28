@@ -23,8 +23,8 @@ public class Nota {
     private String nombreProceso;
     @Column(name = "fecha")
     private LocalDate fecha;
-    @Column(name = "asiertos")
-    private String asiertos;
+    @Column(name = "aciertos")
+    private Integer aciertos;
     @Column(name = "desaciertos")
     private Integer desaciertos;
     @Column(name = "noRespondidos")

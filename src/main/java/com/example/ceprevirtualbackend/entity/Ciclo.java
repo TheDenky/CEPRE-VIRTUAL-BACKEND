@@ -20,6 +20,10 @@ public class Ciclo {
     @JsonIgnore
     private List<EstudianteCiclo> estudianteCiclo;
 
+    @OneToMany(mappedBy = "ciclo")
+    @JsonIgnoreProperties(value="material")
+    private List<Material> material;
+
     @Column(name = "nombreCiclo")
     private String nombreCiclo;
     @Column(name = "numeroCiclo")
