@@ -19,7 +19,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
-        boolean authentic = estudianteService.verificarCredenciales(loginRequest.getUser(), loginRequest.getPassword());
+        boolean authentic = estudianteService.verificarCredenciales(loginRequest.getUser(), loginRequest.getPassword(), loginRequest.getRole());
 
         if(authentic){
             //return ResponseEntity.ok("Login exitoso");

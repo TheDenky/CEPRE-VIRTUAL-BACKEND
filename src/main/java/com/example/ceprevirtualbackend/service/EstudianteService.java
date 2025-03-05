@@ -12,10 +12,10 @@ import java.util.Optional;
 public class EstudianteService {
     @Autowired
     EstudianteRepository estudianteRepository;
-    public boolean verificarCredenciales(String dni, String contrasena){
+    public boolean verificarCredenciales(String dni, String contrasena, String role){
         Estudiante estudiante = estudianteRepository.findByDni(dni);
 
-        return estudiante != null && estudiante.getDni().equals(contrasena);
+        return estudiante != null && estudiante.getDni().equals(contrasena) && estudiante.getRole().equals(role);
     }
     //public Estudiante
     public Estudiante getEstudianteByDni(String dni){
