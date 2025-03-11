@@ -22,6 +22,10 @@ public class EstudianteCicloController {
     public Optional<EstudianteCiclo> getById(@PathVariable("estudianteCicloId") Long estudianteCicloId){
         return estudianteCicloService.getEstudianteCiclo(estudianteCicloId);
     }
+    @GetMapping("/ciclo/{cicloId}")
+    public List<EstudianteCiclo> getByCiclo(@PathVariable Long cicloId) {
+        return estudianteCicloService.getByCiclo(cicloId);
+    }
     @PostMapping
     public EstudianteCiclo saveUpdate(@RequestBody EstudianteCiclo estudianteCiclo){
         estudianteCicloService.saveOrUdateEstudianteCiclo(estudianteCiclo);

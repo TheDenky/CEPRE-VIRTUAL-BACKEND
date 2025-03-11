@@ -19,6 +19,9 @@ public class EstudianteCicloService {
     public Optional<EstudianteCiclo> getEstudianteCiclo(Long id){
         return estudianteCicloRepository.findById(id);
     }
+    public List<EstudianteCiclo> getByCiclo(Long cicloId) {
+        return estudianteCicloRepository.findByCiclo_CicloId(cicloId);
+    }
     public void saveOrUdateEstudianteCiclo(EstudianteCiclo estudianteCiclo){
         estudianteCicloRepository.save(estudianteCiclo);
     }
