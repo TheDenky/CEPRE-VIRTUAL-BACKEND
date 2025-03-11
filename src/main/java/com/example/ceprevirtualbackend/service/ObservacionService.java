@@ -19,6 +19,9 @@ public class ObservacionService {
     public Optional<Observacion> getObservacion(Long id){
         return observacionRepository.findById(id);
     }
+    public List<Observacion> getObservacionesByEstudianteCiclo(Long estudianteCicloId) {
+        return observacionRepository.findByEstudianteCicloId(estudianteCicloId);
+    }
     public void saveOrUpdateObservacion(Observacion observacion){
         observacionRepository.save(observacion);
     }

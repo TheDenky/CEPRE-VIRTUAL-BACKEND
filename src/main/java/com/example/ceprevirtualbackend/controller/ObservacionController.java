@@ -20,8 +20,12 @@ public class ObservacionController {
         return observacionService.getObservaciones();
     }
     @GetMapping("/{observacionId}")
-    public Optional<Observacion> getById(Long observacionId){
+    public Optional<Observacion> getById(@PathVariable("observacionId") Long observacionId){
         return observacionService.getObservacion(observacionId);
+    }
+    @GetMapping("/ec/{estudianteCicloId}")
+    public List<Observacion> getByEstudianteCiclo(@PathVariable("estudianteCicloId") Long estudianteCicloId) {
+        return observacionService.getObservacionesByEstudianteCiclo(estudianteCicloId);
     }
     @PostMapping
     public Observacion saveUpdate(@RequestBody Observacion observacion){
