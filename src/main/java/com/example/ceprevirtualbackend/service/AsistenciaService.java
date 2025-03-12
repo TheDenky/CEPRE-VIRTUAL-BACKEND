@@ -1,6 +1,7 @@
 package com.example.ceprevirtualbackend.service;
 
 import com.example.ceprevirtualbackend.entity.Asistencia;
+import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.repository.AsistenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class AsistenciaService {
 
     public Optional<Asistencia> getAsistencia(Long id){
         return asistenciaRepository.findById(id);
+    }
+    public List<Asistencia> getObservacionesByEstudianteCiclo(Long estudianteCicloId) {
+        return asistenciaRepository.findByEstudianteCicloId(estudianteCicloId);
     }
 
     public void saveOrUpdateAsistencia(Asistencia asistencia){

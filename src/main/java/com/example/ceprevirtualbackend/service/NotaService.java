@@ -18,6 +18,9 @@ public class NotaService {
     public Optional<Nota> getNota(Long id){
         return notaRepository.findById(id);
     }
+    public List<Nota> getObservacionesByEstudianteCiclo(Long estudianteCicloId) {
+        return notaRepository.findByEstudianteCicloId(estudianteCicloId);
+    }
     public void saveOrUpdateNota(Nota nota){
         notaRepository.save(nota);
     }

@@ -1,6 +1,7 @@
 package com.example.ceprevirtualbackend.controller;
 
 import com.example.ceprevirtualbackend.entity.Nota;
+import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.service.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,10 @@ public class NotaController {
     @GetMapping("/{notaId}")
     public Optional<Nota> getById(@PathVariable("notaId") Long notaId){
         return notaService.getNota(notaId);
+    }
+    @GetMapping("/ec/{estudianteCicloId}")
+    public List<Nota> getByEstudianteCiclo(@PathVariable("estudianteCicloId") Long estudianteCicloId) {
+        return notaService.getObservacionesByEstudianteCiclo(estudianteCicloId);
     }
     @PostMapping
     public Nota saveUpdate(@RequestBody Nota nota){
