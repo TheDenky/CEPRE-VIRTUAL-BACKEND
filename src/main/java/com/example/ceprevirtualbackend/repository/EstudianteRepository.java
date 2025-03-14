@@ -9,7 +9,10 @@ import java.util.Optional;
 @Repository
 public interface EstudianteRepository extends JpaRepository<Estudiante, Long> {
 
-    Estudiante findByDni(String dni);
+    // Asegurar que el método devuelve un Optional
+    Optional<Estudiante> findByDni(String dni);
     //Optional<Estudiante> findStudentByDni(String dni);
+    boolean existsByDni(String dni);
+
 
 }

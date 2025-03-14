@@ -3,9 +3,11 @@ package com.example.ceprevirtualbackend.controller;
 import com.example.ceprevirtualbackend.entity.EstudianteCiclo;
 import com.example.ceprevirtualbackend.service.EstudianteCicloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,4 +37,12 @@ public class EstudianteCicloController {
     public void delete(@PathVariable("estudianteCicloId") Long estudianteCicloId){
         estudianteCicloService.deleteEstudianteCiclo(estudianteCicloId);
     }
+
+    @PostMapping("/importar")
+    public ResponseEntity<Map<String, Object>> importarMatriculas(@RequestBody Map<String, Object> request) {
+        Map<String, Object> respuesta = estudianteCicloService.matricularEstudiantes(request);
+        return ResponseEntity.ok(respuesta);
+    }
+
+
 }

@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface EstudianteCicloRepository extends JpaRepository<EstudianteCiclo, Long> {
     List<EstudianteCiclo> findByCiclo_CicloId(Long cicloId);
+    boolean existsByEstudiante_EstudianteIdAndCiclo_CicloId(Long estudianteId, Long cicloId);
 }
