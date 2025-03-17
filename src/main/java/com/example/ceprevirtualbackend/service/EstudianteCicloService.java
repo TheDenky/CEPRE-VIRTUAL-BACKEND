@@ -89,5 +89,33 @@ public class EstudianteCicloService {
         respuesta.put("errores", errores);
         return respuesta;
     }
+    public List<Map<String, Object>> getEstudianteCicloByDniAndCiclo(Long cicloId, List<String> dniList) {
+        List<Map<String, Object>> resultado = new ArrayList<>();
+
+        for (String dni : dniList) {
+            Optional<Estudiante> estudianteOpt = estudianteRepository.findByDni(dni);
+
+            if (estudianteOpt.isPresent()) {
+                Long estudianteId = estudianteOpt.get().getEstudianteId();
+                Optional<EstudianteCiclo> estudianteCicloOpt =
+                        estudianteCicloRepository.findByEstudiante_EstudianteIdAndCiclo_CicloId(estudianteId, cicloId);
+
+                if (estudianteCicloOpt.isPresent()) {
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("dni", dni);
+                    data.put("estudianteCicloId", estudianteCicloOpt.get().getEstudianteCicloId());
+                    resultado.add(data);
+                } else {
+                    System.out.println("⚠️ No se encontró estudianteCiclo para DNI: " + dni);
+                }
+            } else {
+                System.out.println("⚠️ No se encontró estudiante con DNI: " + dni);
+            }
+        }
+
+        System.out.println("✅ Datos generados para enviar: " + resultado); // Log en backend
+
+        return resultado;
+    }
 
 }

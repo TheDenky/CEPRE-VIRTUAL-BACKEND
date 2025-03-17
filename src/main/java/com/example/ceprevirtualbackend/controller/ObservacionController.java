@@ -4,9 +4,11 @@ import aj.org.objectweb.asm.Opcodes;
 import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.service.ObservacionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,5 +37,11 @@ public class ObservacionController {
     @DeleteMapping("/{observacionId}")
     public void delete(@PathVariable("observacionId") Long observacionId){
         observacionService.deleteObservacion(observacionId);
+    }
+    // 📌 Endpoint para registrar observacion en lote
+    @PostMapping("/importar")
+    public ResponseEntity<Map<String, Object>> importarObservaciones(@RequestBody List<Observacion> observaciones){
+        Map<String, Object> respuesta = observacionService.guardarObservaciones(observaciones);
+        return ResponseEntity.ok(respuesta);
     }
 }

@@ -44,5 +44,17 @@ public class EstudianteCicloController {
         return ResponseEntity.ok(respuesta);
     }
 
+    // 📌 Nuevo endpoint para obtener estudianteCicloId por DNI y cicloId
+    @PostMapping("/getByDniAndCiclo")
+    public ResponseEntity<List<Map<String, Object>>> getByDniAndCiclo(@RequestBody Map<String, Object> request) {
+        Long cicloId = Long.parseLong(request.get("cicloId").toString());
+        List<String> dniList = (List<String>) request.get("dniList");
+
+        List<Map<String, Object>> resultado = estudianteCicloService.getEstudianteCicloByDniAndCiclo(cicloId, dniList);
+        System.out.println("🔍 Datos a enviar: " + resultado); // Agregar log para verificar en backend
+
+        return ResponseEntity.ok(resultado);
+    }
+
 
 }

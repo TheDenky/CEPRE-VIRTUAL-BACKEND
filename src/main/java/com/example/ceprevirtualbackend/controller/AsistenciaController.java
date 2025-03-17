@@ -4,9 +4,11 @@ import com.example.ceprevirtualbackend.entity.Asistencia;
 import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.service.AsistenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,5 +37,10 @@ public class AsistenciaController {
     @DeleteMapping("/{asistenciaId}")
     public void delete(@PathVariable("asistenciaId") Long asistenciaId){
         asistenciaService.deleteAsistencia(asistenciaId);
+    }
+    @PostMapping("importar")
+    public ResponseEntity<Map<String, Object>> importarAsistencias(@RequestBody List<Asistencia> asistencias){
+        Map<String, Object> respuesta = asistenciaService.guardarAsistencias(asistencias);
+        return ResponseEntity.ok(respuesta);
     }
 }

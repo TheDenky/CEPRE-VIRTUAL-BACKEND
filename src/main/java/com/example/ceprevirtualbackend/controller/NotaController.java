@@ -4,9 +4,11 @@ import com.example.ceprevirtualbackend.entity.Nota;
 import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.service.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,5 +37,12 @@ public class NotaController {
     @DeleteMapping("/{notaId}")
     public void delete(@PathVariable("notaId") Long notaId){
         notaService.deleteNota(notaId);
+    }
+
+    // 📌 Endpoint para registrar notas en lote
+    @PostMapping("/importar")
+    public ResponseEntity<Map<String, Object>> importarNotas(@RequestBody List<Nota> notas) {
+        Map<String, Object> respuesta = notaService.guardarNotas(notas);
+        return ResponseEntity.ok(respuesta);
     }
 }
