@@ -20,7 +20,11 @@ public class EstudianteService {
 
         if (estudianteOpt.isPresent()) {
             Estudiante estudiante = estudianteOpt.get();
-            return estudiante.getDni().equals(contrasena) && estudiante.getRole().equals(role);
+            if (estudiante.getRole().equals("master")){
+                return estudiante.getPassword().equals(contrasena);
+            }else {
+                return estudiante.getPassword().equals(contrasena) && estudiante.getRole().equals(role);
+            }
         }
         return false; // Retorna `false` si el estudiante no existe
     }
