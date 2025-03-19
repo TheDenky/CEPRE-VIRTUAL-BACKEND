@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/auth")
-@CrossOrigin(origins = "http://localhost:5173") // Habilitar CORS para el frontend
+@RequestMapping(path = "/api/v1/auth")
+//@CrossOrigin(origins = "http://localhost:5173") // Habilitar CORS para el frontend
 public class AuthController {
     @Autowired
     private EstudianteService estudianteService;
