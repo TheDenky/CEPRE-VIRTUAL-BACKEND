@@ -4,6 +4,7 @@ import com.example.ceprevirtualbackend.entity.Nota;
 import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.service.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,19 @@ public class NotaController {
     @DeleteMapping("/{notaId}")
     public void delete(@PathVariable("notaId") Long notaId){
         notaService.deleteNota(notaId);
+    }
+
+    @DeleteMapping("/deleteByEstudianteCiclo/{estudianteCicloId}")
+    public ResponseEntity<?> deleteByEstudianteCiclo(@PathVariable Long estudianteCicloId) {
+        try {
+            notaService.deleteByEstudianteCiclo(estudianteCicloId);
+            return ResponseEntity.ok("✅ Todas las notas han sido eliminadas.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("⚠ Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("❌ Error interno al eliminar notas.");
+        }
     }
 
     // 📌 Endpoint para registrar notas en lote

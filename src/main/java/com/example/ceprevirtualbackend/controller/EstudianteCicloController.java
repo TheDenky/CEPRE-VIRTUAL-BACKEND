@@ -56,5 +56,10 @@ public class EstudianteCicloController {
         return ResponseEntity.ok(resultado);
     }
 
+    @DeleteMapping("/eliminarPorCiclo/{cicloId}")
+    public ResponseEntity<String> eliminarMatriculasPorCiclo(@PathVariable Long cicloId) {
+        estudianteCicloService.eliminarMatriculasPorCiclo(cicloId);
+        return ResponseEntity.ok("✅ Matrículas eliminadas con éxito.");
+    }
 
 }

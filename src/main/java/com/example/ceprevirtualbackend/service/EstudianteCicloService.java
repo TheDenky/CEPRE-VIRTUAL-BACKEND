@@ -5,6 +5,7 @@ import com.example.ceprevirtualbackend.entity.EstudianteCiclo;
 import com.example.ceprevirtualbackend.repository.CicloRepository;
 import com.example.ceprevirtualbackend.repository.EstudianteCicloRepository;
 import com.example.ceprevirtualbackend.repository.EstudianteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -116,6 +117,11 @@ public class EstudianteCicloService {
         System.out.println("✅ Datos generados para enviar: " + resultado); // Log en backend
 
         return resultado;
+    }
+
+    @Transactional
+    public void eliminarMatriculasPorCiclo(Long cicloId) {
+        estudianteCicloRepository.deleteByCicloId(cicloId);
     }
 
 }

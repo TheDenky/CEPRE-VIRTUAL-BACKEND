@@ -2,6 +2,7 @@ package com.example.ceprevirtualbackend.service;
 
 import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.repository.ObservacionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,12 @@ public class ObservacionService {
     public void deleteObservacion(Long id){
         observacionRepository.deleteById(id);
     }
+
+    @Transactional
+    public void deleteByEstudianteCiclo(Long estudianteCicloId) {
+        observacionRepository.deleteByEstudianteCiclo_EstudianteCicloId(estudianteCicloId);
+    }
+
     public Map<String, Object> guardarObservaciones(List<Observacion> observaciones){
         Map<String, Object> respuesta = new HashMap<>();
         List<String> errores = new ArrayList<>();

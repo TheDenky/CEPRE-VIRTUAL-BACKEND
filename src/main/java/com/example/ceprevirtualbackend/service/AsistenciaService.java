@@ -3,6 +3,7 @@ package com.example.ceprevirtualbackend.service;
 import com.example.ceprevirtualbackend.entity.Asistencia;
 import com.example.ceprevirtualbackend.entity.Observacion;
 import com.example.ceprevirtualbackend.repository.AsistenciaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,11 @@ public class AsistenciaService {
 
     public void deleteAsistencia(Long id){
         asistenciaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteByEstudianteCiclo(Long estudianteCicloId) {
+        asistenciaRepository.deleteByEstudianteCiclo_EstudianteCicloId(estudianteCicloId);
     }
 
     // 📌 Método para guardar múltiples asistencias

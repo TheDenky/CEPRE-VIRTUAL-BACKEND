@@ -16,8 +16,11 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         String id = "00000000";
+        String idAdmin = "10000000";
 
         Optional<Estudiante> estudianteExistente = estudianteRepository.findByDni(id);
+        Optional<Estudiante> estudianteExistenteAdmin = estudianteRepository.findByDni(idAdmin);
+
         if (estudianteExistente.isEmpty()) {
             Estudiante estudiante = new Estudiante();
             estudiante.setNombre("Master");
@@ -33,7 +36,25 @@ public class DataInitializer implements CommandLineRunner {
             estudianteRepository.save(estudiante);
             System.out.println("✅ Estudiante por defecto creado.");
         } else {
-            System.out.println("ℹ️ Ya existe en la base de datos.");
+            System.out.println("ℹ️ Estudiante ya existe en la base de datos.");
+        }
+
+        if (estudianteExistenteAdmin.isEmpty()) {
+            Estudiante estudiante = new Estudiante();
+            estudiante.setNombre("Admin");
+            estudiante.setApellidoPaterno("");
+            estudiante.setApellidoMaterno("");
+            estudiante.setDni(idAdmin);
+            estudiante.setCorreo("");
+            estudiante.setNumeroCelular("");
+            estudiante.setUser("cepreAdmin123");
+            estudiante.setPassword("0admin.psw.cepre0");
+            estudiante.setRole("admin");
+
+            estudianteRepository.save(estudiante);
+            System.out.println("✅ Admin por defecto creado.");
+        } else {
+            System.out.println("ℹ️ Admin ya existe en la base de datos.");
         }
     }
 }

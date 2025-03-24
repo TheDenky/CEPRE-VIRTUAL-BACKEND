@@ -2,6 +2,7 @@ package com.example.ceprevirtualbackend.service;
 
 import com.example.ceprevirtualbackend.entity.Nota;
 import com.example.ceprevirtualbackend.repository.NotaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,11 @@ public class NotaService {
     }
     public void deleteNota(Long id){
         notaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteByEstudianteCiclo(Long estudianteCicloId) {
+        notaRepository.deleteByEstudianteCiclo_EstudianteCicloId(estudianteCicloId);
     }
 
     // 📌 Método para guardar múltiples notas
