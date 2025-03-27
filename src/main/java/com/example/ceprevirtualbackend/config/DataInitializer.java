@@ -30,7 +30,7 @@ public class DataInitializer implements CommandLineRunner {
             estudiante.setCorreo("");
             estudiante.setNumeroCelular("");
             estudiante.setUser("master123");
-            estudiante.setPassword("5a21c7b2294de4be2cfa2c49cd6dae16d7a227370931dde195c1e96f5d02694d");
+            estudiante.setPassword("$2a$12$ldg9EuAVTVrQTqjvgOXbJe472fiAaJBhaL4TSOA8DZlFRMVwLrnWK");
             estudiante.setRole("master");
 
             estudianteRepository.save(estudiante);
@@ -48,7 +48,7 @@ public class DataInitializer implements CommandLineRunner {
             estudiante.setCorreo("");
             estudiante.setNumeroCelular("");
             estudiante.setUser("cepreAdmin123");
-            estudiante.setPassword("0admin.psw.cepre0");
+            estudiante.setPassword("$2a$12$nyhDhMrzo3T/pUI5danjP.xkHnryjxQMxuvykhuGFngQ3ySiJPXLO");
             estudiante.setRole("admin");
 
             estudianteRepository.save(estudiante);

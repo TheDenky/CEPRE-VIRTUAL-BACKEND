@@ -3,12 +3,17 @@ package com.example.ceprevirtualbackend.service;
 import com.example.ceprevirtualbackend.entity.Estudiante;
 import com.example.ceprevirtualbackend.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class EstudianteService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder; // 🔥 Inyectar el PasswordEncoder
+
     @Autowired
     EstudianteRepository estudianteRepository;
     //public boolean verificarCredenciales(String dni, String contrasena, String role){
@@ -21,7 +26,11 @@ public class EstudianteService {
         if (estudianteOpt.isPresent()) {
             Estudiante estudiante = estudianteOpt.get();
             if (estudiante.getRole().equals("master")){
-                return estudiante.getPassword().equals(contrasena);
+                //return estudiante.getPassword().equals(contrasena);
+                return passwordEncoder.matches(contrasena, estudiante.getPassword());
+            }else if (estudiante.getRole().equals("admin")) {
+                return passwordEncoder.matches(contrasena, estudiante.getPassword()) && estudiante.getRole().equals(role);
+                //return estudiante.getPassword().equals(contrasena) && estudiante.getRole().equals(role);
             }else {
                 return estudiante.getPassword().equals(contrasena) && estudiante.getRole().equals(role);
             }
@@ -46,7 +55,11 @@ public class EstudianteService {
     }
 
     public void saveOrUpdateEstudiante(Estudiante estudiante){
+        if (estudiante.getRole().equalsIgnoreCase("admin") || estudiante.getRole().equalsIgnoreCase("master")) {
+            estudiante.setPassword(passwordEncoder.encode(estudiante.getPassword())); // 🔥 Solo cifrar si es ADMIN o MASTER
+        }
         estudianteRepository.save(estudiante);
+        //estudianteRepository.save(estudiante);
     }
 
     public void deleteEstudiante(Long id){
