@@ -24,6 +24,10 @@ public class Ciclo {
     @JsonIgnoreProperties(value="material")
     private List<Material> material;
 
+    @OneToMany(mappedBy = "ciclo")
+    @JsonIgnoreProperties(value = "comunicado")
+    private List<Comunicado> comunicado;
+
     @Column(name = "nombreCiclo")
     private String nombreCiclo;
     @Column(name = "numeroCiclo")

@@ -24,11 +24,11 @@ public class Nota {
     @Column(name = "fecha")
     private LocalDate fecha;
     @Column(name = "aciertos")
-    private Integer aciertos;
+    private String aciertos;
     @Column(name = "desaciertos")
-    private Integer desaciertos;
+    private String desaciertos;
     @Column(name = "noRespondidos")
-    private Integer noRespondidos;
+    private String noRespondidos;
     @Column(name = "NotaFinal")
-    private Double NotaFinal;
+    private String NotaFinal;
 }
