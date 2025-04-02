@@ -14,7 +14,7 @@ public class Material {
 
     @ManyToOne
     @JoinColumn(name = "cicloId")
-    @JsonIgnoreProperties(value={"ciclo","material"})
+    @JsonIgnoreProperties(value={"ciclo","material", "comunicado"})
     private Ciclo ciclo;
 
     @Column(name = "tipo")
