@@ -1,4 +1,5 @@
 package com.example.ceprevirtualbackend.config;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,16 +27,25 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/login", "/api/v1/auth/user").permitAll() // 🔥 Permitir estas rutas sin autenticación
+                        .requestMatchers("/api/v1/auth/login", "/api/v1/auth/logout").permitAll() // 🔥 Permitir estas rutas sin autenticación
                         //.requestMatchers("/api/v1/estudiante/**").hasAnyRole("ESTUDIANTE", "MASTER", "ADMIN")
                         .requestMatchers("/api/v1/**").hasAnyRole("MASTER", "ADMIN")
                         //.requestMatchers("/api/v1/**").hasRole("MASTER")
                         .anyRequest().authenticated()
                 )
+                .logout(logout -> logout
+                        .logoutUrl("/api/v1/auth/logout") // 🔥 Ruta para cerrar sesión
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.getWriter().write("{\"message\": \"Logout exitoso\"}");
+                        })
+                        .invalidateHttpSession(true) // 🔥 Invalida la sesión automáticamente
+                        .deleteCookies("JSESSIONID") // 🔥 Borra la cookie de sesión
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)) // 🔥 Permitir sesiones
                 .rememberMe(remember -> remember
                         .key("uniqueAndSecret") // 🔥 Habilitar "recordarme"
-                        .tokenValiditySeconds(86400) // 24 horas
+                        .tokenValiditySeconds(28800) // 8 horas
                 );
         return http.build();
     }
@@ -52,5 +62,6 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 
 }

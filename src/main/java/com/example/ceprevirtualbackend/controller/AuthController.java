@@ -67,7 +67,19 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
 
+        if (session != null) {
+            session.invalidate(); // 🔥 Cierra la sesión en el servidor
+            SecurityContextHolder.clearContext(); // 🔥 Elimina la autenticación de Spring Security
+            System.out.println("✅ Sesión cerrada correctamente.");
+            return ResponseEntity.ok("{\"message\": \"Sesión cerrada correctamente\"}");
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"No hay sesión activa\"}");
+    }
 
     @GetMapping("/user")
     public ResponseEntity<?> getCurrentUser(HttpServletRequest request) {
