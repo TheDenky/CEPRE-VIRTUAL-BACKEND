@@ -23,7 +23,7 @@ services:
       - DB_URL=jdbc:mysql://mysqldb:3306/ceprevirtualbd?createDatabaseIfNotExist=true&serverTimezone=UTC
       - DB_USER_NAME=root
       - DB_PASSWORD=CEPRE.virtual
-      - FRONT_URL=http://localhost:5173
+      - FRONT_URL=https://ceprevirtual.vercel.app
     restart: always
     depends_on:
       mysqldb:
